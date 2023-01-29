@@ -12,16 +12,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function TodoEditDialog({open, DialogHandle}) {
-  // const [open, setOpen] = React.useState(false);
+export default function TodoEditDialog({ open, DialogHandle, todo, editTodo }) {
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
+  const [ editText, setEditText ] = React.useState(todo.text);
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
+  const textHandler = () => {
+    editTodo(todo.id, editText);
+    DialogHandle();
+  }
 
   return (
       <Dialog
@@ -36,14 +34,14 @@ export default function TodoEditDialog({open, DialogHandle}) {
           <DialogContentText id="alert-dialog-slide-description">
           <p> By clicking on the text you can change the task!</p>
           </DialogContentText>
-            <TextField fullWidth />
+            <TextField defaultValue={editText} onChange={ (e) => {setEditText(e.target.value)}} fullWidth />
           <DialogContentText style={{ display: "flex", justifyContent: "center", paddingTop:"1em" }}>
             Just click OK!
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={DialogHandle} >Cancel</Button>
-          <Button   >OK</Button>
+          <Button onClick={textHandler} >OK</Button>
         </DialogActions>
       </Dialog>
   );

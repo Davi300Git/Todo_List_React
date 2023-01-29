@@ -16,7 +16,17 @@ export default function Home() {
        var filtered = todos.filter((todo) => todo.id !== id);
        setTodos(filtered);
     }
+    const editTodo = (id, editText) => {
+        var todoArrys = [...todos];
 
+        for(var i in todoArrys) {
+            if(todoArrys[i].id === id){
+                todoArrys[i].text = editText;
+            }
+        }
+
+        setTodos(todoArrys);
+    }
 
   return (
     <Container maxWidth="xs" style={{ marginTop: "1em"}}>
@@ -24,7 +34,7 @@ export default function Home() {
         <List sx={{ marginTop: "1em" }}>
             {todos.map((todo) => (
             <div key = {todo.id} style = {{ marginTop: "1em" }}>
-                <TodoItem todo = {todo} todoDelete={todoDelete} />    
+                <TodoItem editTodo = { editTodo } todo = {todo} todoDelete={todoDelete} />    
             </div>
             ))}
         </List>
