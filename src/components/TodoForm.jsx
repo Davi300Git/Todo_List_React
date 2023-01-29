@@ -1,7 +1,7 @@
 import { Button, Paper, TextField } from '@mui/material'
 import React, { useState } from 'react'
 
-export default function Form({ todoAdd }) {
+export default function TodoForm({ todoAdd }) {
     const [ text, setText ] = useState(null);
     const [ id, setId ] = useState(0);
 
@@ -9,6 +9,7 @@ export default function Form({ todoAdd }) {
         const todoObj = { text: text, id : id};
         setId( id + 1 );
         todoAdd(todoObj);
+        document.getElementById("outlined-basic").value = null;
     }
 
   return (
@@ -23,7 +24,7 @@ export default function Form({ todoAdd }) {
             }}>
             <TextField 
                 id="outlined-basic" 
-                label="Tarefa" 
+                label="Tasks" 
                 variant="outlined" 
                 onChange={(e) => setText(e.target.value)} 
                 fullWidth
